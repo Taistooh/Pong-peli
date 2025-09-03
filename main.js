@@ -20,6 +20,7 @@ let gameState = "aloita"; // pelin tila: "aloita", "pelaa", "peliohi"
 // Kimpoaa pelaajan mailasta
 
 // Jos pallo menee vasemman reunan ohi -> peli ohi
+    document.getElementById('gameOver').style.display = 'block';
 
 // Kimpoaa oikeasta reunasta
 
