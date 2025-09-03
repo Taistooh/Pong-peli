@@ -1,0 +1,17 @@
+.delius-swash-caps-regular {
+  font-family: "Delius Swash Caps", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+h1 {
+    display: block;
+    font-family: "Delius Swash Caps";
+    font-size: 50px;
+    color: #6c584c;
+    text-align: center;
+
+}
+
+body {
+    background-color: #d6ccc2 ;
+}
