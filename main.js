@@ -9,7 +9,30 @@ let scoreLeft = 0; // vasemman pelaajan pisteet
 let scoreRight = 0; // oikean pelaajan pisteet
 let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 
+
+// Pelin piirto
+function drawGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Tyhjä ruutu
+    drawBall(); // Pallon piirto
+    // Tänne mailat pisteet jne.
+}
+
+
 // Pallo
+function drawBall() {
+    ctx.beginPath(); // Uusi polku
+    ctx.arc(
+        ball.x,        // x-koordinaatti
+        ball.y,        // y-koordinaatti
+        ball.radius,   // säde
+        0,             // alku­kulma
+        Math.PI * 2    // loppukulma (ympyrä)
+    );
+    ctx.fillStyle = "white"; // väri
+    ctx.fill();              // täyttö
+    ctx.closePath();         // Sulje polku
+}
+
 
 // Pelaajan "maila"
 
@@ -25,4 +48,12 @@ let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 // Kimpoaa oikeasta reunasta
 
 // Pisteenlasku
+
+// Pelisilmukka
+function gameLoop() {
+    drawGame();
+    requestAnimationFrame(gameLoop);
+}
+gameLoop();
+
 
