@@ -11,8 +11,22 @@ let ball = {
     dy: 3                  // nopeus y-suunta
 };
 
-let paddleLeft = { x: ..., y: ..., width: ..., height: ..., dy: ... }; // vasen maila
-let paddleRight = { x: ..., y: ..., width: ..., height: ..., dy: ... }; // oikea maila
+let paddleLeft = {                     // vasen maila
+    x: 10,                             // 10px vasemmasta reunasta
+    y: canvas.height / 2 - 40,         // keskelle pystysuunnassa
+    width: 10,                         // mailan leveys
+    height: 80,                        // mailan korkeus
+    dy: 0                              // nopeus y-suunnassa (aluksi 0)
+};
+
+let paddleRight = {                    // oikea maila
+    x: canvas.width - 20,              // 10px oikeasta reunasta
+    y: canvas.height / 2 - 40,
+    width: 10,
+    height: 80,
+    dy: 0
+};
+
 let scoreLeft = 0; // vasemman pelaajan pisteet
 let scoreRight = 0; // oikean pelaajan pisteet
 let gameState = "start"; // pelin tila: "start", "play", "gameOver"
@@ -22,11 +36,11 @@ let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Tyhjä ruutu
     drawBall(); // Pallon piirto
-    // Tänne mailat pisteet jne.
+    drawPaddles();  // Mailojen piirto
+    // Tänne pisteet
 }
 
-
-// Pallo
+// Pallon piirto
 function drawBall() {
     ctx.beginPath(); // Uusi polku
     ctx.arc(
@@ -41,8 +55,27 @@ function drawBall() {
     ctx.closePath();         // Sulje polku
 }
 
+// Mailojen piirto
+function drawPaddles() {
+    ctx.fillStyle = "black"; // mailojen väri (erottuuko musta?)
 
-// Pelaajan "maila"
+    // Vasen maila
+    ctx.fillRect(
+        paddleLeft.x, 
+        paddleLeft.y, 
+        paddleLeft.width, 
+        paddleLeft.height
+    );
+
+    // Oikea maila
+    ctx.fillRect(
+        paddleRight.x, 
+        paddleRight.y, 
+        paddleRight.width, 
+        paddleRight.height
+    );
+}
+
 
 // Näppäimet
 
