@@ -2,7 +2,15 @@ const canvas = document.getElementById('pelialue');
 const ctx = canvas.getContext('2d');
 
 // Muuttujat
-let ball = { x: ..., y: ..., radius: ..., dx: ..., dy: ... }; // pallon sijainti, koko, nopeus
+
+let ball = { 
+    x: canvas.width / 2,   // keskelle vaaka
+    y: canvas.height / 2,  // keskelle pysty
+    radius: 10,            // pallon säde
+    dx: 3,                 // nopeus x-suunta
+    dy: 3                  // nopeus y-suunta
+};
+
 let paddleLeft = { x: ..., y: ..., width: ..., height: ..., dy: ... }; // vasen maila
 let paddleRight = { x: ..., y: ..., width: ..., height: ..., dy: ... }; // oikea maila
 let scoreLeft = 0; // vasemman pelaajan pisteet
