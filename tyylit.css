@@ -17,5 +17,14 @@ body {
 }
 
 #pelialue {
+    position: absolute;
     background-color: #6c584c;
+    width: 80%;
+    height: 700;
+}
+
+#gameOver {
+    position: absolute;
+    font-size: 2em;
+    display: none;
 }
