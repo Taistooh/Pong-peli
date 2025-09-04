@@ -1,7 +1,7 @@
 // Perusasetukset
 const canvas = document.getElementById('pelialue');
-const canvas.width = 800;
-const canvas.height = 500;
+canvas.width = 800;
+canvas.height = 500;
 const ctx = canvas.getContext('2d');
 
 // Muuttujat
