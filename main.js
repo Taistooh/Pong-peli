@@ -35,6 +35,10 @@ let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 let keys = {};
 let winner = "";
 
+let timeLeft = 30; // sekuntia
+let timerInterval;
+
+
 // Pelin käynnistys
 document.getElementById('startBtn').addEventListener('click', () => {
     if (gameState === 'start' || gameState === 'gameOver') {
@@ -50,7 +54,21 @@ function resetGame() {
     ball.dx = 3;
     paddleRight.y = canvas.height / 2 - paddleRight.height / 2;
     paddleLeft.y = canvas.height / 2 - paddleLeft.height / 2;
+    startTimer();
 }
+
+// Ajastin
+function startTimer() {
+    timeLeft = 30;
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft <= 0) {
+            checkGameOver(); // tarkista voittaja ajan täyttyessä
+            clearInterval(timerInterval);
+        }
+    }, 1000);
+}
+
 
 // Liikutetaan oikeaa mailaa
 function movePaddles() {
@@ -86,6 +104,7 @@ function update() {
         ) {
             ball.dx *= -1; //vaihda suunta
             ball.x = paddleLeft.x + paddleLeft.width + ball.radius; //työntää pallon mailan ulkopuolelle
+            increaseBallSpeed(); // lisätään nopeutta
         }
 
         //törmäys oikeaan mailaan
@@ -96,6 +115,7 @@ function update() {
         ) {
             ball.dx *= -1; //vaihda suunta
             ball.x = paddleRight.x - ball.radius; //työntää pallon mailan ulkopuolelle
+            increaseBallSpeed(); // lisätään nopeutta
         }
 
         //pisteiden lasku
@@ -120,8 +140,19 @@ function update() {
 function resetBall() {
     ball.x = canvas.width / 2;
     ball.y = canvas.height / 2;
-    ball.dx = (Math.random() > 0.5 ? 3 : -3); //satunnainen suunta
-    ball.dy = (Math.random() > 0.5 ? 3 : -3); 
+    // suunta vaihtuu mutta saavutettu nopeus säilyy
+    ball.dx = Math.sign(ball.dx) * (Math.random() > 0.5 ? 1 : -1) * Math.abs(ball.dx);
+    ball.dy = Math.sign(ball.dy) * (Math.random() > 0.5 ? 1 : -1) * Math.abs(ball.dy);
+}
+
+// Pallon nopeuden kasvatus
+function increaseBallSpeed() {
+    ball.dx *= 1.05;
+    ball.dy *= 1.05;
+
+    // varmistus ettei nopeus kasva liikaa
+    ball.dx = Math.max(Math.min(ball.dx, 10), -10);
+    ball.dy = Math.max(Math.min(ball.dy, 10), -10);
 }
 
 // Pelin piirto
@@ -147,6 +178,9 @@ function drawScores() {
 
     ctx.textAlign = 'right';
     ctx.fillText(scoreRight, canvas.width - 20, 30); //oik. yläkulma
+
+    ctx.textAlign = 'center';
+    ctx.fillText(`Aika: ${timeLeft}s`, canvas.width / 2, 30); // ajastin
 }
 
 // Pallon piirto
@@ -220,11 +254,21 @@ document.addEventListener('keyup', (e) => {
 
 //Game over-tarkistus
 function checkGameOver() {
-    if (scoreLeft >= 5) {
+    if (scoreLeft >= 5 || scoreRight >= 5 || timeLeft <= 0) {
         gameState = 'gameOver';
-        winner = "Pelaaja 2 voitti!";
+        clearInterval(timerInterval); // ajastimen nollaus
+
+        // voittajan määritys
+        if (scoreLeft > scoreRight) {
+            winner = "Pelaaja 2 voitti!";
+        } else if (scoreRight > scoreLeft) {
+            winner = "Pelaaja 1 voitti!";
+        } else {
+            winner = "Tasapeli!";
+        }
     }
 }
+
 // Pelisilmukka
 function gameLoop() {
     updateAIMovement(); // tekoäly ohjaa vasenta mailaa
