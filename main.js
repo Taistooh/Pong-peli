@@ -32,7 +32,55 @@ let paddleRight = {                    // oikea maila
 let scoreLeft = 0; // vasemman pelaajan pisteet
 let scoreRight = 0; // oikean pelaajan pisteet
 let gameState = "start"; // pelin tila: "start", "play", "gameOver"
+let keys = {};
 
+// Pelin käynnistys
+document.getElementById('startBtn').addEventListener('click', () => {
+    if (gameState === 'start' || gameState === 'gameOver') {
+        resetGame();
+        gameState = 'play';
+    }
+});
+
+function resetGame() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.dx = 3;
+    ball.dx = 3;
+    paddleRight.y = canvas.height / 2 - paddleRight.height / 2;
+    paddleLeft.y = canvas.height / 2 - paddleLeft.height / 2;
+}
+
+// Liikutetaan oikeaa mailaa
+function movePaddles() {
+    if (keys['ArrowUp']) {
+        paddleRight.y -= 5;
+    }
+    if (keys['ArrowDown']) {
+        paddleRight.y += 5;
+    }
+    if (paddleRight.y < 0) paddleRight.y = 0;
+    if (paddleRight.y + paddleRight.height > canvas.height) {
+        paddleRight.y = canvas.height - paddleRight.height;
+    }
+}
+
+// Päivitetään pallon ja mailojen liike
+function update() {
+    if (gameState === 'play') {
+        // pallo liikkuu
+        ball.x += ball.dx;
+        ball.y += ball.dy;
+
+        //kimpoaa ylä- ja alaseinästä
+        if (ball.y - ball.radius < 0 || ball.y + ball.radius > canvas.height) {
+            ball.dy *= -1;
+        }
+
+        //mailojen liike
+        movePaddles();
+    }
+}
 
 // Pelin piirto
 function drawGame() {
@@ -94,8 +142,8 @@ function updateAIMovement() {
 // Näppäimet
 document.addEventListener('keydown', (e) => {
     keys[e.key] = true;
-    if (gameState === 'aloita' && e.code === 'Space') {
-        gameState = 'pelaa';
+    if (gameState === 'start' && e.code === 'Space') {
+        gameState = 'play';
     }
 });
 
@@ -103,21 +151,13 @@ document.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
-// Kimpoaa ylä- ja alaseinästä
-
-// Kimpoaa pelaajan mailasta
-
-// Jos pallo menee vasemman reunan ohi -> peli ohi
-    document.getElementById('gameOver').style.display = 'block';
-
-// Kimpoaa oikeasta reunasta
-
 // Pisteenlasku
 
 // Pelisilmukka
 function gameLoop() {
     updateAIMovement(); // tekoäly ohjaa vasenta mailaa
     drawGame();
+    update();
     requestAnimationFrame(gameLoop);
 }
 
