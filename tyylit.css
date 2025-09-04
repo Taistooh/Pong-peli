@@ -1,30 +1,64 @@
-.delius-swash-caps-regular {
-  font-family: "Delius Swash Caps", cursive;
-  font-weight: 400;
-  font-style: normal;
+*{
+    box-sizing: border-box;
 }
-h1 {
-    display: block;
+
+html, body {
+    height: 100%;
+    margin: 0;
+    background-color: #fefae0 ;
+    color: #bc6c25;
     font-family: "Delius Swash Caps";
-    font-size: 50px;
-    color: #6c584c;
+}
+
+.topbar{
+    height: 64px;
+    background: #dda15e;
+    color: #bc6c25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px;
+    margin: 20px auto 0 auto;
+    border-radius: 12px;
+    max-width: 800px;
+}
+
+.topbar h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.2px;
     text-align: center;
 
 }
 
-body {
-    background-color: #d6ccc2 ;
+.page{
+    min-height: calc(100vh -64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.canvas-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
 #pelialue {
-    position: absolute;
-    background-color: #6c584c;
-    width: 80%;
-    height: 700;
+    width: 100%;
+    height: auto;
+    display: block;
+    background-color: #606c38;
+    border: 5px solid #283618;
 }
 
-#gameOver {
-    position: absolute;
-    font-size: 2em;
-    display: none;
+@media (max-width: 520px){
+    .topbar{height: 56px;}
+    .page {padding: 12px;}
+    .topbar h1{font-size: 1rem;}
 }
