@@ -33,6 +33,7 @@ let scoreLeft = 0; // vasemman pelaajan pisteet
 let scoreRight = 0; // oikean pelaajan pisteet
 let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 let keys = {};
+let winner = "";
 
 // Pelin käynnistys
 document.getElementById('startBtn').addEventListener('click', () => {
@@ -97,9 +98,30 @@ function update() {
             ball.x = paddleRight.x - ball.radius; //työntää pallon mailan ulkopuolelle
         }
 
+        //pisteiden lasku
+        if (ball.x + ball.radius < 0) {
+            //pallo meni vasemmalta yli
+            scoreRight++;
+            checkGameOver();
+            resetBall();
+        }
+        if (ball.x - ball.radius > canvas.width) {
+            //pallo meni oikealta yli
+            scoreLeft++;
+            checkGameOver();
+            resetBall();
+        }
+
         //mailojen liike
         movePaddles();
     }
+}
+
+function resetBall() {
+    ball.x = canvas.width / 2;
+    ball.y = canvas.height / 2;
+    ball.dx = (Math.random() > 0.5 ? 3 : -3); //satunnainen suunta
+    ball.dy = (Math.random() > 0.5 ? 3 : -3); 
 }
 
 // Pelin piirto
@@ -107,7 +129,24 @@ function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Tyhjä ruutu
     drawBall(); // Pallon piirto
     drawPaddles();  // Mailojen piirto
-    // Tänne pisteet
+    drawScores();// Tänne pisteet
+
+    if (gameState === 'gameOver') {
+        ctx.fillStyle = 'white';
+        ctx.font = '40px Delius Swash Caps';
+        ctx.textAlign = 'center';
+        ctx.fillText(winner, canvas.width / 2, canvas.height / 2);
+    }
+}
+
+function drawScores() {
+    ctx.fillStyle = 'white';
+    ctx.font = '24px Delius Swash Caps';
+    ctx.textAlign = 'left';
+    ctx.fillText(scoreLeft, 20, 30); // vas. yläkulma
+
+    ctx.textAlign = 'right';
+    ctx.fillText(scoreRight, canvas.width - 20, 30); //oik. yläkulma
 }
 
 // Pallon piirto
@@ -179,8 +218,13 @@ document.addEventListener('keyup', (e) => {
     keys[e.key] = false;
 });
 
-// Pisteenlasku
-
+//Game over-tarkistus
+function checkGameOver() {
+    if (scoreLeft >= 5) {
+        gameState = 'gameOver';
+        winner = "Pelaaja 2 voitti!";
+    }
+}
 // Pelisilmukka
 function gameLoop() {
     updateAIMovement(); // tekoäly ohjaa vasenta mailaa
