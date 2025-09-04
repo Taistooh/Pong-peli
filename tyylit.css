@@ -57,6 +57,29 @@ html, body {
     border: 5px solid #283618;
 }
 
+.controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+button {
+    background: #dda15e;
+    color: #283618;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-family: 'Delius Swash Caps';
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #bc6c25;
+    color: #606c38;
+}
+
 @media (max-width: 520px){
     .topbar{height: 56px;}
     .page {padding: 12px;}
