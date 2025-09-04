@@ -161,13 +161,21 @@ function updateAIMovement() {
 
 // Näppäimet
 document.addEventListener('keydown', (e) => {
+    if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault(); //estää sivun scrollauksen
+    }
+
     keys[e.key] = true;
+
     if (gameState === 'start' && e.code === 'Space') {
         gameState = 'play';
     }
 });
 
 document.addEventListener('keyup', (e) => {
+    if (['ArrowUp', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault(); //estää sivun scrollauksen
+    }
     keys[e.key] = false;
 });
 
