@@ -77,6 +77,26 @@ function update() {
             ball.dy *= -1;
         }
 
+        //törmäys vasempaan mailaan
+        if (
+            ball.x - ball.radius < paddleLeft.x + paddleLeft.width &&
+            ball.y > paddleLeft.y &&
+            ball.y < paddleLeft.y + paddleLeft.height
+        ) {
+            ball.dx *= -1; //vaihda suunta
+            ball.x = paddleLeft.x + paddleLeft.width + ball.radius; //työntää pallon mailan ulkopuolelle
+        }
+
+        //törmäys oikeaan mailaan
+        if (
+            ball.x + ball.radius > paddleRight.x &&
+            ball.y > paddleRight.y &&
+            ball.y < paddleRight.y + paddleRight.height
+        ) {
+            ball.dx *= -1; //vaihda suunta
+            ball.x = paddleRight.x - ball.radius; //työntää pallon mailan ulkopuolelle
+        }
+
         //mailojen liike
         movePaddles();
     }
