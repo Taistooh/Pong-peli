@@ -59,7 +59,7 @@ function drawBall() {
 
 // Mailojen piirto
 function drawPaddles() {
-    ctx.fillStyle = "black"; // mailojen väri (erottuuko musta?)
+    ctx.fillStyle = "white"; // mailojen väri
 
     // Vasen maila
     ctx.fillRect(
@@ -76,6 +76,18 @@ function drawPaddles() {
         paddleRight.width, 
         paddleRight.height
     );
+}
+
+// Tekoälyvastus (tässä seuraa pallon y-koordinaattia niin ettei ehdi aina mukaan)
+function updateAIMovement() {
+    const targetY = ball.y - paddleRight.height / 2;
+    const aiSpeed = 2.5; // hitaampi kuin pallon nopeus
+
+    if (paddleLeft.y < targetY) {
+        paddleLeft.y += aiSpeed;
+    } else if (paddleLeft.y > targetY) {
+        paddleLeft.y -= aiSpeed;
+    }
 }
 
 
@@ -104,9 +116,12 @@ document.addEventListener('keyup', (e) => {
 
 // Pelisilmukka
 function gameLoop() {
+    updateAIMovement(); // tekoäly ohjaa vasenta mailaa
     drawGame();
     requestAnimationFrame(gameLoop);
 }
+
 gameLoop();
+
 
 
