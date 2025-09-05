@@ -5,15 +5,17 @@
 html, body {
     height: 100%;
     margin: 0;
-    background-color: #fefae0 ;
-    color: #bc6c25;
-    font-family: "Delius Swash Caps";
+    background-image: url("autumn-bg.jpg") ;
+    background-size: cover;
+    background-position: center;
+    color: #faa307;
+    font-family: "Unkempt";
 }
 
 .topbar{
     height: 64px;
-    background: #dda15e;
-    color: #bc6c25;
+    background: #6f1d1b;
+    color: #faa307;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,7 +27,7 @@ html, body {
 
 .topbar h1 {
     margin: 0;
-    font-size: 30px;
+    font-size: 40px;
     font-weight: 600;
     letter-spacing: 0.2px;
     text-align: center;
@@ -53,8 +55,8 @@ html, body {
     width: 100%;
     height: auto;
     display: block;
-    background-color: #606c38;
-    border: 5px solid #283618;
+    background-color: #8f250c;
+    border: 5px solid #6f1d1b;
 }
 
 .controls {
@@ -63,21 +65,21 @@ html, body {
 }
 
 button {
-    background: #dda15e;
-    color: #283618;
-    border: none;
+    background: #faa307;
+    color: #6f1d1b;
+    border: 3px solid #6f1d1b;
     padding: 12px 24px;
     border-radius: 8px;
-    font-size: 18px;
-    font-family: 'Delius Swash Caps';
+    font-size: 30px;
+    font-family: 'Unkempt';
     font-weight: 600;
     cursor: pointer;
     transition: 0.2s;
 }
 
 button:hover {
-    background: #bc6c25;
-    color: #606c38;
+    background: #6f1d1b;
+    color: #faa307;
 }
 
 @media (max-width: 520px){

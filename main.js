@@ -133,7 +133,7 @@ function drawGame() {
 
     if (gameState === 'gameOver') {
         ctx.fillStyle = 'white';
-        ctx.font = '40px Delius Swash Caps';
+        ctx.font = '40px Unkempt';
         ctx.textAlign = 'center';
         ctx.fillText(winner, canvas.width / 2, canvas.height / 2);
     }
@@ -141,7 +141,7 @@ function drawGame() {
 
 function drawScores() {
     ctx.fillStyle = 'white';
-    ctx.font = '24px Delius Swash Caps';
+    ctx.font = '24px Unkempt';
     ctx.textAlign = 'left';
     ctx.fillText(scoreLeft, 20, 30); // vas. yläkulma
 
