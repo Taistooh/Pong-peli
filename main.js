@@ -195,7 +195,7 @@ function drawBall() {
         0,             // alku­kulma
         Math.PI * 2    // loppukulma (ympyrä)
     );
-    ctx.fillStyle = "white"; // väri
+    ctx.fillStyle = "#faf3aeff"; // väri
     ctx.fill();              // täyttö
     ctx.closePath();         // Sulje polku
 }
