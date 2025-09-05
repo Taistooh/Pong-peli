@@ -35,7 +35,7 @@ let gameState = "start"; // pelin tila: "start", "play", "gameOver"
 let keys = {};
 let winner = "";
 
-let timeLeft = 30; // sekuntia
+let timeLeft = 60; // sekuntia
 let timerInterval;
 
 
@@ -59,7 +59,7 @@ function resetGame() {
 
 // Ajastin
 function startTimer() {
-    timeLeft = 30;
+    timeLeft = 60;
     timerInterval = setInterval(() => {
         timeLeft--;
         if (timeLeft <= 0) {
