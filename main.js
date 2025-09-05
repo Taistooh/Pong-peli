@@ -163,7 +163,7 @@ function drawGame() {
     drawScores();// Tänne pisteet
 
     if (gameState === 'gameOver') {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = '#faa307';
         ctx.font = '40px Unkempt';
         ctx.textAlign = 'center';
         ctx.fillText(winner, canvas.width / 2, canvas.height / 2);
