@@ -163,7 +163,7 @@ function drawGame() {
     drawScores();// Tänne pisteet
 
     if (gameState === 'gameOver') {
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = '#faa307';
         ctx.font = '40px Unkempt';
         ctx.textAlign = 'center';
         ctx.fillText(winner, canvas.width / 2, canvas.height / 2);
@@ -171,13 +171,15 @@ function drawGame() {
 }
 
 function drawScores() {
-    ctx.fillStyle = 'white';
+    ctx.fillStyle = '#faa307';
     ctx.font = '24px Unkempt';
+    //Pelaaja 1 (vasen maila, ai)
     ctx.textAlign = 'left';
-    ctx.fillText(scoreLeft, 20, 30); // vas. yläkulma
+    ctx.fillText(`Pelaaja 1: ${scoreLeft}`, 20, 30); // vas. yläkulma
 
+    //Pelaaja 2 (oikea maila, ihminen)
     ctx.textAlign = 'right';
-    ctx.fillText(scoreRight, canvas.width - 20, 30); //oik. yläkulma
+    ctx.fillText(`Pelaaja 2: ${scoreRight}`, canvas.width - 20, 30); //oik. yläkulma
 
     ctx.textAlign = 'center';
     ctx.fillText(`Aika: ${timeLeft}s`, canvas.width / 2, 30); // ajastin
@@ -260,9 +262,9 @@ function checkGameOver() {
 
         // voittajan määritys
         if (scoreLeft > scoreRight) {
-            winner = "Pelaaja 2 voitti!";
-        } else if (scoreRight > scoreLeft) {
             winner = "Pelaaja 1 voitti!";
+        } else if (scoreRight > scoreLeft) {
+            winner = "Pelaaja 2 voitti!";
         } else {
             winner = "Tasapeli!";
         }
