@@ -219,10 +219,10 @@ function drawPaddles() {
     );
 }
 
-// Tekoälyvastus (tässä seuraa pallon y-koordinaattia niin ettei ehdi aina mukaan)
+// Tekoälyvastus (seuraa pallon y-koordinaattia niin ettei ehdi aina mukaan)
 function updateAIMovement() {
     const targetY = ball.y - paddleRight.height / 2;
-    const aiSpeed = 2.5; // hitaampi kuin pallon nopeus
+    const aiSpeed = Math.min(Math.abs(ball.dy) * 0.8, 6); // nopeus riippuu pallon nopeudesta, max 6
 
     if (paddleLeft.y < targetY) {
         paddleLeft.y += aiSpeed;
